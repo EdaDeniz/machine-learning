@@ -103,8 +103,6 @@ def main():
     K = 10
     exp1()
     exp2(K)
-    print("hellooo")
-
 
 if __name__ == "__main__":
     main()
