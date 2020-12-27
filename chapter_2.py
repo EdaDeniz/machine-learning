@@ -57,39 +57,40 @@ def exp1():
 def exp2(K):
     vectorX = np.random.uniform(0, 10, K)
     vectorP = np.random.uniform(15, 20, 10)
+    vectorX = vectorX[:, np.newaxis]
+    vectorP = vectorP[:, np.newaxis]
     vectorY = 3 * vectorX + 5
     vectorQ = 3 * vectorP + 5
     n1 = np.random.normal(0, 1, vectorX.shape)
     n2 = np.random.normal(0, 1, vectorX.shape)
-    vectorY = (n1 + vectorY).reshape(-1,1)
-
+    vectorY = (n1 + vectorY)
     vectorQ = n2 + vectorQ
 
     poly_features = PolynomialFeatures(degree=0)
-    x_poly = poly_features.fit_transform(vectorY)
+    x_poly = poly_features.fit_transform(vectorX)
     model = LinearRegression()
-    model.fit(x_poly, vectorQ)
+    model.fit(x_poly, vectorY)
     coeffs = model.coef_
     plotModel(0, coeffs, (0, 10), 1, 'green')
 
     poly_features = PolynomialFeatures(degree=1)
-    x_poly = poly_features.fit_transform(vectorY)
+    x_poly = poly_features.fit_transform(vectorX)
     model = LinearRegression()
-    model.fit(x_poly, vectorQ)
+    model.fit(x_poly, vectorY)
     coeffs = model.coef_
     plotModel(0, coeffs, (0, 10), 1, 'red')
 
     poly_features = PolynomialFeatures(degree=2)
-    x_poly = poly_features.fit_transform(vectorY)
+    x_poly = poly_features.fit_transform(vectorX)
     model = LinearRegression()
-    model.fit(x_poly, vectorQ)
+    model.fit(x_poly, vectorY)
     coeffs = model.coef_
     plotModel(0, coeffs, (0, 10), 1, 'blue')
 
     poly_features = PolynomialFeatures(degree=3)
-    x_poly = poly_features.fit_transform(vectorY)
+    x_poly = poly_features.fit_transform(vectorX)
     model = LinearRegression()
-    model.fit(x_poly, vectorQ)
+    model.fit(x_poly, vectorY)
     coeffs = model.coef_
     plotModel(0, coeffs, (0, 10), 1, 'pink')
 
@@ -102,8 +103,6 @@ def main():
     K = 10
     exp1()
     exp2(K)
-    print("hellooo")
-
 
 if __name__ == "__main__":
     main()
